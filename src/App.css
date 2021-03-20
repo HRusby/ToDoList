@@ -37,6 +37,12 @@ body {
   color: #333333;
 }
 
+.completedToDoText {
+  text-decoration: line-through;
+  font-style: italic;
+  color: #cdcdcd;
+}
+
 input[type=checkbox] {
   margin-right: 10px;
   font-size: 30px;

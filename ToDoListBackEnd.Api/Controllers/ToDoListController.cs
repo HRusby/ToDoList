@@ -27,11 +27,11 @@ namespace ToDoListBackEnd.Api.Controllers
             return "Test";
         }
 
-        [HttpGet]
-        [Route("GetAllLists")]
-        public IEnumerable<ToDoList> GetAllLists()
+        [HttpPost]
+        [Route("GetAllListsForUser")]
+        public IEnumerable<ToDoList> GetAllListsForUser([FromBody] int userId)
         {
-            return Dao.GetAllLists(1);
+            return Dao.GetAllLists(userId);
         }
 
         [HttpPost]

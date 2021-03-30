@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import ToDoItem from './ToDoItem'
-import ToDoSamples from '../SampleData/ToDoItems'
 
 class ToDoList extends Component {
     constructor(props) {
@@ -8,8 +7,8 @@ class ToDoList extends Component {
         console.log(props)
         this.state = {
             loading: false,
-            listId: this.props.listId,
-            todos: ToDoSamples,
+            listId: props.listId,
+            todos: []
         }
         this.handleChange = this.handleChange.bind(this)
     }
@@ -48,7 +47,6 @@ class ToDoList extends Component {
             })
             .then(response => response.json())
             .then(data => this.setState(prevState => { return { ...prevState, loading: false, todos: data } }))
-            .then(x => console.log(this.state))
     }
 
     render() {

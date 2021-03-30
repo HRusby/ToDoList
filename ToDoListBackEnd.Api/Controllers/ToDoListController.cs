@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using ToDoListBackEnd.Api.Domain;
 using ToDoListBackEnd.Api.Dao;
+using ToDoListBackEnd.Api.Domain;
 
 namespace ToDoListBackEnd.Api.Controllers
 {
@@ -12,6 +12,7 @@ namespace ToDoListBackEnd.Api.Controllers
     public class ToDoListController : ControllerBase
     {
         private readonly ILogger<ToDoListController> _logger;
+
         private readonly ToDoListDao Dao;
 
         public ToDoListController(ILogger<ToDoListController> logger)
@@ -21,7 +22,8 @@ namespace ToDoListBackEnd.Api.Controllers
         }
 
         [HttpGet]
-        public String Test(){
+        public String Test()
+        {
             return "Test";
         }
 
@@ -34,15 +36,22 @@ namespace ToDoListBackEnd.Api.Controllers
 
         [HttpPost]
         [Route("GetAllListItemsForListId")]
-        public IEnumerable<ListItem> GetAllListItemsForListId([FromBody]int listId)
+        public IEnumerable<ListItem>
+        GetAllListItemsForListId([FromBody] int listId)
         {
             return Dao.GetAllItemsForList(listId);
         }
 
         [HttpPost]
         [Route("InsertItemForList")]
-        public void InsertItemForList(int listId, int userId, string text, bool isComplete){
-            Dao.AddItemToList(listId, userId, text, isComplete);
+        public void InsertItemForList(
+            int listId,
+            int userId,
+            string text,
+            bool isComplete
+        )
+        {
+            Dao.AddItemToList (listId, userId, text, isComplete);
         }
     }
 }

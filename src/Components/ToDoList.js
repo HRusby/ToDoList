@@ -8,7 +8,8 @@ class ToDoList extends Component {
         this.state = {
             loading: false,
             listId: props.listId,
-            todos: []
+            todos: [],
+            closeList: props.closeList
         }
         this.handleChange = this.handleChange.bind(this)
     }
@@ -58,7 +59,11 @@ class ToDoList extends Component {
             <ToDoItem key={item.id} item={item} handleChange={this.handleChange} />
         ))
         const content = this.state.loading ? <p>loading</p> : ToDos
-        return <div style={mainStyles}>{content}</div>
+        return (
+            <div style={mainStyles}>
+                <button onClick={this.state.closeList}>Close List</button>
+                {content}
+            </div>)
     }
 }
 

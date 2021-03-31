@@ -1,14 +1,28 @@
 import React from 'react'
 import ToDoList from './ToDoList'
+import ListMenu from './ListMenu'
 
 class MainContent extends React.Component {
   constructor() {
     super()
     this.state = {
       loading: false,
+      showMenu: true,
       userId: 1,
-      listIds: []
+      lists: [],
+      selectedList: 1
     }
+
+    this.selectList = this.selectList.bind(this)
+    this.closeList = this.closeList.bind(this)
+  }
+
+  closeList() {
+    this.setState(prevState => { return { ...prevState, showMenu: true } })
+  }
+
+  selectList(listId) {
+    this.setState(prevState => { return { ...prevState, showMenu: false, selectedList: listId } })
   }
 
   componentDidMount() {
@@ -27,16 +41,18 @@ class MainContent extends React.Component {
         body: JSON.stringify(this.state.userId)
       })
       .then(response => response.json())
-      .then(d => console.log(d))
-      .then(data => this.setState(prevState => { return { ...prevState, loading: false, listIds: data } }))
-      .then(x => console.log(this.state))
+      .then(data => {
+        this.setState(prevState => { return { ...prevState, loading: false, lists: data } })
+      })
   }
 
   render() {
     // Display Lists if one not picked else display that list
-
+    var listOrMenu = this.state.showMenu
+      ? <ListMenu lists={this.state.lists} selectList={this.selectList} />
+      : <ToDoList listId={this.state.selectedList} closeList={this.closeList} />
     return <main>
-      <ToDoList listId='1' />
+      {this.state.loading ? <p>loading...</p> : listOrMenu}
     </main>
   }
 }

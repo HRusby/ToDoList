@@ -6,7 +6,7 @@ function ToDoItem(props) {
             <input type="checkbox"
                 checked={props.item.isCompleted}
                 onChange={() => props.handleChange(props.item.id)} />
-            <p className={props.item.isCompleted ? "completedToDoText" : null}>{props.item.text}</p>
+            <span className={props.item.isCompleted ? "completedToDoText" : null}>{props.item.text}</span>
         </div>
     )
 }

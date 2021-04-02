@@ -15,6 +15,11 @@
   border-top: 2px solid #92929278;
 }
 
+.listName {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 .toDoListContent {
   display: flex;
   flex-direction: column;
@@ -54,7 +59,7 @@ input[type="checkbox"]:focus {
 .close {
   position: absolute;
   right: 0px;
-  top: 0px;
+  top: 50%;
   width: 32px;
   height: 32px;
   opacity: 0.3;
@@ -65,9 +70,10 @@ input[type="checkbox"]:focus {
 .close:before,
 .close:after {
   position: absolute;
+  top: -50%;
   left: 15px;
   content: " ";
-  height: 33px;
+  height: 100%;
   width: 2px;
   background-color: #333;
 }

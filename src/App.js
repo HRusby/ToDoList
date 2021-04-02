@@ -4,7 +4,7 @@ import MainContent from "./Components/MainContent";
 
 function App() {
   return (
-    <div className="ToDoList">
+    <div className="appContainer">
       <MainContent />
     </div>
   );

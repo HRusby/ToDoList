@@ -2,34 +2,64 @@ body {
   background-color: whitesmoke;
 }
 
-.ToDoList {
+main {
   background-color: white;
   margin: auto;
   width: 50%;
+  padding: 20px;
+  margin-top: 10px;
+  border: 1px solid #efefef;
+  box-shadow:
+  /* The top layer shadow */ 0 1px 1px rgba(0, 0, 0, 0.15),
+    /* The second layer */ 0 10px 0 -5px #eee,
+    /* The second layer shadow */ 0 10px 1px -4px rgba(0, 0, 0, 0.15),
+    /* The third layer */ 0 20px 0 -10px #eee,
+    /* The third layer shadow */ 0 20px 1px -9px rgba(0, 0, 0, 0.15);
+}
+
+.listMenu {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid #efefef;
-  box-shadow:
-  /* The top layer shadow */
-      0 1px 1px rgba(0,0,0,0.15),
-          /* The second layer */
-      0 10px 0 -5px #eee,
-          /* The second layer shadow */
-      0 10px 1px -4px rgba(0,0,0,0.15),
-          /* The third layer */
-      0 20px 0 -10px #eee,
-          /* The third layer shadow */
-      0 20px 1px -9px rgba(0,0,0,0.15);
-  padding: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  width: 85%;
+}
+
+.ListSelector {
+  display: inline-flex;
+  margin: auto;
+  justify-content: center;
+  width: 70%;
+  border-bottom: 1px solid #ececece1;
+  font-family: Roboto, sans-serif;
+  font-weight: 100;
+  font-size: 15px;
+}
+.ListSelector:hover {
+  background-color: #f3f3f346;
+}
+
+.ListSelector:active {
+  background-color: #ebebeb4f;
+}
+
+.ToDoList {
+  margin: auto;
+  margin-top: 10px;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .ToDoItem {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 30px 20px 0;
-  width: 70%;
+  padding: 10px 20px 0px;
+  width: 90%;
   border-bottom: 1px solid #cecece;
   font-family: Roboto, sans-serif;
   font-weight: 100;
@@ -43,11 +73,39 @@ body {
   color: #cdcdcd;
 }
 
-input[type=checkbox] {
+input[type="checkbox"] {
   margin-right: 10px;
   font-size: 30px;
 }
 
-input[type=checkbox]:focus {
+input[type="checkbox"]:focus {
   outline: 0;
+}
+
+.close {
+  position: absolute;
+  display: inline-block;
+  right: 32px;
+  top: 32px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.5;
+}
+.close:hover {
+  opacity: 1;
+}
+.close:before,
+.close:after {
+  position: absolute;
+  left: 15px;
+  content: " ";
+  height: 33px;
+  width: 2px;
+  background-color: rgb(44, 44, 44);
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
 }

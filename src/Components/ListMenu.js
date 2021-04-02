@@ -17,7 +17,12 @@ class ListMenu extends React.Component {
                 <ListSelector key={item.listId} list={item} selectList={this.state.selectList} />
             ))
         }
-        return Lists
+        return (
+            <div className='listMenu'>
+                <h1>Select a List</h1>
+                {Lists}
+            </div>
+        )
     }
 }
 

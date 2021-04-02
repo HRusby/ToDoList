@@ -1,5 +1,6 @@
 import React from "react";
 import ListSelector from "./ListSelector"
+import '../css/ListMenu.css'
 
 class ListMenu extends React.Component {
     constructor(props) {

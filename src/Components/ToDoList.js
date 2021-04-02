@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import ToDoItem from './ToDoItem'
+import '../css/ToDoList.css'
 
 class ToDoList extends Component {
     constructor(props) {
@@ -57,11 +58,13 @@ class ToDoList extends Component {
         const content = this.state.loading ? <p>loading</p> : ToDos
         return (
             <div className="ToDoList">
-                <header className='listHeader'>
+                <div className='toDoListHeader'>
                     <h1 className='listName'>{this.state.list.listName}</h1>
-                    <div className='close' onClick={this.state.closeList} />
-                </header>
-                {content}
+                    <h1 className='close' onClick={this.state.closeList} />
+                </div>
+                <content className='toDoListContent'>
+                    {content}
+                </content>
             </div>)
     }
 }

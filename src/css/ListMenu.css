@@ -1,0 +1,27 @@
+.listMenu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  width: 85%;
+}
+
+.ListSelector {
+  display: inline-flex;
+  margin: auto;
+  justify-content: center;
+  width: 70%;
+  border-bottom: 1px solid #ececece1;
+  font-family: Roboto, sans-serif;
+  font-weight: 100;
+  font-size: 15px;
+}
+.ListSelector:hover {
+  background-color: #f3f3f346;
+}
+
+.ListSelector:active {
+  background-color: #ebebeb4f;
+}

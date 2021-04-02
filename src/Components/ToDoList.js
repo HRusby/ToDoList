@@ -60,11 +60,11 @@ class ToDoList extends Component {
             <div className="ToDoList">
                 <div className='toDoListHeader'>
                     <h1 className='listName'>{this.state.list.listName}</h1>
-                    <h1 className='close' onClick={this.state.closeList} />
+                    <div className='close' onClick={this.state.closeList} />
                 </div>
-                <content className='toDoListContent'>
+                <div className='toDoListContent'>
                     {content}
-                </content>
+                </div>
             </div>)
     }
 }

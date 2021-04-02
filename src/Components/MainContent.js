@@ -21,8 +21,8 @@ class MainContent extends React.Component {
     this.setState(prevState => { return { ...prevState, showMenu: true } })
   }
 
-  selectList(listId) {
-    this.setState(prevState => { return { ...prevState, showMenu: false, selectedList: listId } })
+  selectList(list) {
+    this.setState(prevState => { return { ...prevState, showMenu: false, selectedList: list } })
   }
 
   componentDidMount() {
@@ -50,7 +50,9 @@ class MainContent extends React.Component {
     // Display Lists if one not picked else display that list
     var listOrMenu = this.state.showMenu
       ? <ListMenu lists={this.state.lists} selectList={this.selectList} />
-      : <ToDoList listId={this.state.selectedList} closeList={this.closeList} />
+      : <ToDoList
+        list={this.state.selectedList}
+        closeList={this.closeList} />
     return <main>
       {this.state.loading ? <p>loading...</p> : listOrMenu}
     </main>

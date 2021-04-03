@@ -51,13 +51,24 @@ namespace ToDoListBackEnd.Api.Dao
         }
 
         public void AddItemToList(int listId, int userId, string itemText, bool isCompleted){
-            MySqlCommand cmd = new MySqlCommand("AddListItem", Connection);
-            cmd.Parameters.Add(new MySqlParameter("lId", listId));
-            cmd.Parameters.Add(new MySqlParameter("itemText", itemText));
-            cmd.Parameters.Add(new MySqlParameter("isCompleted", isCompleted));
-            cmd.Parameters.Add(new MySqlParameter("uId", userId));
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.ExecuteNonQuery();
+            using(MySqlCommand cmd = new MySqlCommand("AddListItem", Connection)){
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new MySqlParameter("lId", listId));
+                cmd.Parameters.Add(new MySqlParameter("itemText", itemText));
+                cmd.Parameters.Add(new MySqlParameter("isCompleted", isCompleted));
+                cmd.Parameters.Add(new MySqlParameter("uId", userId));
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void UpdateSpecificListItem(ListItem item){
+            using(MySqlCommand cmd = new MySqlCommand("UpdateSpecificListItem", Connection)){
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("id", item.Id);
+                cmd.Parameters.AddWithValue("itemText", item.Text);
+                cmd.Parameters.AddWithValue("isCompleted", item.IsCompleted);
+                int rows = cmd.ExecuteNonQuery();
+            }            
         }
     }
 }

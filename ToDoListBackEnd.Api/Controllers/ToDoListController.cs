@@ -1,4 +1,6 @@
+using System.ComponentModel;
 using System;
+using System.Text.Json;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -12,19 +14,12 @@ namespace ToDoListBackEnd.Api.Controllers
     public class ToDoListController : ControllerBase
     {
         private readonly ILogger<ToDoListController> _logger;
-
         private readonly ToDoListDao Dao;
 
         public ToDoListController(ILogger<ToDoListController> logger)
         {
             _logger = logger;
             Dao = new ToDoListDao();
-        }
-
-        [HttpGet]
-        public String Test()
-        {
-            return "Test";
         }
 
         [HttpPost]
@@ -36,22 +31,34 @@ namespace ToDoListBackEnd.Api.Controllers
 
         [HttpPost]
         [Route("GetAllListItemsForListId")]
-        public IEnumerable<ListItem>
-        GetAllListItemsForListId([FromBody] int listId)
+        public IEnumerable<ListItem> GetAllListItemsForListId([FromBody] int listId)
         {
             return Dao.GetAllItemsForList(listId);
         }
 
         [HttpPost]
         [Route("InsertItemForList")]
-        public void InsertItemForList(
-            int listId,
-            int userId,
-            string text,
-            bool isComplete
-        )
+        public void InsertItemForList([FromBody]JsonElement data)
         {
-            Dao.AddItemToList (listId, userId, text, isComplete);
+            int listId = Convert.ToInt32(data.GetProperty("listId").ToString());
+            int userId = Convert.ToInt32(data.GetProperty("userId").ToString());
+            string text = data.GetProperty("text").ToString();
+            bool isCompleted = Convert.ToBoolean(data.GetProperty("isCompleted").ToString());
+            Dao.AddItemToList (listId, userId, text, isCompleted);
+        }
+
+        [HttpPost]
+        [Route("UpdateSpecificListItem")]
+        public void UpdateSpecificListItem(ListItem item){
+            Dao.UpdateSpecificListItem(item);
+        }
+
+        [HttpPost]
+        [Route("UpdateListItemSet")]
+        public void UpdateListItemSet(List<ListItem> items){
+            foreach(ListItem item in items){
+                Dao.UpdateSpecificListItem(item);
+            }
         }
     }
 }

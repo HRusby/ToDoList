@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import ToDoItem from './ToDoItem'
+import NewToDoItem from './NewToDoItem'
 import '../css/ToDoList.css'
 
 class ToDoList extends Component {
@@ -11,6 +12,7 @@ class ToDoList extends Component {
         }
         this.handleChange = this.handleChange.bind(this)
         this.submitSingleItem = this.submitSingleItem.bind(this)
+        this.addNewItem = this.addNewItem.bind(this)
     }
 
     // Updates the relevant list property and if it's changed updates and submits the state
@@ -56,6 +58,27 @@ class ToDoList extends Component {
                 body: JSON.stringify(item)
             }
         )
+    }
+
+    addNewItem(itemText) {
+        console.log('itemText: ' + itemText)
+        const reqbody = JSON.stringify({
+            listId: this.props.list.listId,
+            userId: 1,
+            text: itemText,
+            isCompleted: false
+        })
+
+        console.log(reqbody)
+
+        fetch("https://localhost:5001/ToDoList/InsertItemForList",
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: reqbody
+            })
     }
 
     // Loads in the list form API and updates the loading state property
@@ -110,7 +133,7 @@ class ToDoList extends Component {
                 </div>
                 <div className='toDoListContent'>
                     {content}
-
+                    <NewToDoItem addItem={this.addNewItem} />
                 </div>
             </div>)
     }

@@ -3,74 +3,34 @@ import React from "react";
 class ToDoItem extends React.Component {
 
     constructor(props) {
-        super()
+        super(props)
         this.state = {
-            item: props.item,
-            isTextEditable: false,
-            handleChange: props.handleChange
+            isTextEditable: false
         }
 
         this.handleInput = this.handleInput.bind(this)
-        this.submitState = this.submitState.bind(this)
         this.toggleTextEditable = this.toggleTextEditable.bind(this)
     }
 
-    submitState() {
-        console.log(this.state.item)
-        fetch("https://localhost:5001/ToDoList/UpdateSpecificListItem",
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(this.state.item)
-            }
-        )
-    }
-
     handleInput(event) {
-        var item = this.state.item
-        const { name, checked, value } = event.target
-        if (name === "isCompleted") {
-            item = { ...item, isCompleted: checked }
-        }
-        else if (name === "itemText") {
-            item = { ...item, text: value }
-            this.toggleTextEditable()
-        }
-
-        if (item !== this.state.item) {
-            this.setState(prevState => {
-                return {
-                    ...prevState,
-                    item: item
-                }
-            })
-        }
+        this.props.handleChange(this.props.item.id, event)
     }
 
     toggleTextEditable() {
-        console.log('Make Text Editable')
         this.setState(prevState => { return { ...prevState, isTextEditable: !prevState.isTextEditable } })
-    }
-
-    componentWillUnmount() {
-        // Save list if closed
-        this.submitState();
     }
 
     render() {
         const textDisplay = this.state.isTextEditable
             ? <input
                 type="text"
-                name="itemText"
-                value={this.state.item.text}
-                onChange={this.handleInput}
-                onBlur={this.submitState} />
+                name="text"
+                defaultValue={this.props.item.text}
+                onBlur={(event) => { this.handleInput(event); this.toggleTextEditable() }} />
             : <span
-                className={this.state.item.isCompleted ? "completedToDoText" : null}
+                className={this.props.item.isCompleted ? "completedToDoText" : null}
                 onDoubleClick={this.toggleTextEditable} >
-                {this.state.item.text}
+                {this.props.item.text}
             </span>
 
         return (
@@ -78,9 +38,8 @@ class ToDoItem extends React.Component {
                 <input
                     type="checkbox"
                     name="isCompleted"
-                    checked={this.state.item.isCompleted}
-                    onChange={this.handleInput}
-                    onBlur={this.submitState} />
+                    checked={this.props.item.isCompleted}
+                    onChange={this.handleInput} />
                 {textDisplay}
             </form>
         )

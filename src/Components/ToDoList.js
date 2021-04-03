@@ -5,7 +5,6 @@ import '../css/ToDoList.css'
 class ToDoList extends Component {
     constructor(props) {
         super()
-        console.log(props)
         this.state = {
             loading: false,
             list: props.list,
@@ -55,7 +54,9 @@ class ToDoList extends Component {
         const ToDos = this.state.todos.map((item) => (
             <ToDoItem key={item.id} item={item} handleChange={this.handleChange} />
         ))
-        const content = this.state.loading ? <p>loading</p> : ToDos
+        const content = this.state.loading
+            ? <p>loading...</p>
+            : ToDos
         return (
             <div className="ToDoList">
                 <div className='toDoListHeader'>

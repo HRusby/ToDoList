@@ -34,7 +34,7 @@ class ToDoItem extends React.Component {
             </span>
 
         return (
-            <form className="ToDoItem" >
+            <form className="ToDoItem" onSubmit={e => { e.preventDefault(); }}>
                 <input
                     type="checkbox"
                     name="isCompleted"

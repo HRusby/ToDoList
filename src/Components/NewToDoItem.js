@@ -18,6 +18,7 @@ class NewToDoItem extends React.Component {
 
     handleSubmit(event) {
         this.props.addItem(this.state.itemText)
+        this.setState({ itemText: "" })
     }
 
     render() {
@@ -29,7 +30,7 @@ class NewToDoItem extends React.Component {
                 <input
                     type="text"
                     placeholder="New Task..."
-                    defaultValue={this.state.itemText}
+                    value={this.state.itemText}
                     onChange={this.handleChange} />
             </form>
         )

@@ -61,24 +61,31 @@ class ToDoList extends Component {
     }
 
     addNewItem(itemText) {
-        console.log('itemText: ' + itemText)
-        const reqbody = JSON.stringify({
-            listId: this.props.list.listId,
-            userId: 1,
-            text: itemText,
-            isCompleted: false
-        })
-
-        console.log(reqbody)
-
+        //Add to Database via API
         fetch("https://localhost:5001/ToDoList/InsertItemForList",
             {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: reqbody
+                body: JSON.stringify({
+                    listId: this.props.list.listId,
+                    userId: 1,
+                    text: itemText,
+                    isCompleted: false
+                })
             })
+            .then(response => response.json())
+            .then(itemId => this.setState(prevState => {
+                return {
+                    ...prevState,
+                    todos: prevState.todos.concat({
+                        id: itemId,
+                        text: itemText,
+                        isCompleted: false
+                    })
+                }
+            }))
     }
 
     // Loads in the list form API and updates the loading state property

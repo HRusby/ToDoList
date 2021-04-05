@@ -76,5 +76,21 @@ namespace ToDoListBackEnd.Api.Controllers
             // Returns number of rows deleted (should always be 1)
             return Dao.DeleteListItem(listId, itemId);
         }
+
+        [HttpPost]
+        [Route("AddNewList")]
+        public ToDoList AddNewList([FromBody]JsonElement data){
+            string listName = data.GetProperty("listName").ToString();
+            int userId = Convert.ToInt32(data.GetProperty("userId").ToString());
+            return Dao.AddNewList(listName, userId);
+        }
+
+        [HttpPost]
+        [Route("DeleteList")]
+        public int DeleteList([FromBody]JsonElement data){
+            int listId = Convert.ToInt32(data.GetProperty("listId").ToString());
+            int userId = Convert.ToInt32(data.GetProperty("userId").ToString());
+            return Dao.DeleteList(listId, userId);
+        }
     }
 }

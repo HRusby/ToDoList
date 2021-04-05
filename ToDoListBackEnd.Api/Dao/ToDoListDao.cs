@@ -13,6 +13,7 @@ namespace ToDoListBackEnd.Api.Dao
 {
     public class ToDoListDao : ADao
     {
+        // Return all lists for a given user
         public List<ToDoList> GetAllLists(int userId)
         {
             List<ToDoList> results = new List<ToDoList>();
@@ -31,6 +32,7 @@ namespace ToDoListBackEnd.Api.Dao
             return results;
         }
 
+        // Return all ListItems for a given list
         public List<ListItem> GetAllItemsForList(int listId)
         {
             List<ListItem> results = new List<ListItem>();
@@ -50,6 +52,7 @@ namespace ToDoListBackEnd.Api.Dao
             return results;
         }
 
+        // Add a new item to a specific list
         public int AddItemToList(int listId, int userId, string itemText, bool isCompleted){
             using(MySqlCommand cmd = new MySqlCommand("AddListItem", Connection)){
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -65,6 +68,7 @@ namespace ToDoListBackEnd.Api.Dao
             }
         }
 
+        // Update the ItemText/IsCompleted values of a specific listItem
         public void UpdateSpecificListItem(ListItem item){
             using(MySqlCommand cmd = new MySqlCommand("UpdateSpecificListItem", Connection)){
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -75,6 +79,7 @@ namespace ToDoListBackEnd.Api.Dao
             }            
         }
 
+        // Delete all CompletedItems from a specific list
         public int DeleteCompletedItemsForList(int listId){
             using(MySqlCommand cmd = new MySqlCommand("DeleteCompletedItemsForList", Connection)){
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -83,11 +88,36 @@ namespace ToDoListBackEnd.Api.Dao
             }
         }
 
+        // Delete a specific item from a specific list
         public int DeleteListItem(int listId, int itemId){
             using(MySqlCommand cmd = new MySqlCommand("DeleteListItem", Connection)){
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("$listId", listId);
                 cmd.Parameters.AddWithValue("$itemId", itemId);
+                return cmd.ExecuteNonQuery();
+            }
+        }
+
+        // Adds a new List to the db and returns a corresponding object
+        public ToDoList AddNewList(string listName, int userId){
+            using(MySqlCommand cmd = new MySqlCommand("AddNewList", Connection)){
+                cmd.CommandType = CommandType.StoredProcedure;
+                MySqlParameter generatedId = new MySqlParameter("$generatedId", MySqlDbType.Int32);
+                generatedId.Direction = ParameterDirection.Output;
+                cmd.Parameters.AddWithValue("$listName", listName);
+                cmd.Parameters.AddWithValue("$userId", userId);
+                cmd.Parameters.Add(generatedId);
+                cmd.ExecuteNonQuery();
+                return new ToDoList(Convert.ToInt32(generatedId.Value), listName);
+            }
+        }
+
+        // Deletes a list (and child ToDoItems) assuming the list belongs to the user
+        public int DeleteList(int listId, int userId){
+            using(MySqlCommand cmd = new MySqlCommand("DeleteList", Connection)){
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("$listId", listId);
+                cmd.Parameters.AddWithValue("$userId", userId);
                 return cmd.ExecuteNonQuery();
             }
         }

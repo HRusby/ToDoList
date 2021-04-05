@@ -13,6 +13,8 @@ class ToDoList extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.submitSingleItem = this.submitSingleItem.bind(this)
         this.addNewItem = this.addNewItem.bind(this)
+        this.removeCompletedItems = this.removeCompletedItems.bind(this)
+        this.deleteItem = this.deleteItem.bind(this)
     }
 
     // Updates the relevant list property and if it's changed updates and submits the state
@@ -60,6 +62,7 @@ class ToDoList extends Component {
         )
     }
 
+    // Adds the new item to the database and the Component
     addNewItem(itemText) {
         //Add to Database via API
         fetch("https://localhost:5001/ToDoList/InsertItemForList",
@@ -86,6 +89,53 @@ class ToDoList extends Component {
                     })
                 }
             }))
+    }
+
+    deleteItem(itemId) {
+        const listId = this.props.list.listId
+        fetch(
+            "https://localhost:5001/ToDoList/DeleteListItem",
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    'listId': listId,
+                    'itemId': itemId
+                })
+            })
+            .then(resp => resp.json())
+            .then(removedRows => this.setState(prevState => {
+                return {
+                    ...prevState,
+                    todos: prevState.todos.filter(todo => todo.id !== itemId)
+                }
+            }, alert('Deleted ' + removedRows + ' Rows.')))
+    }
+
+    // Calls the API and deletes all completed items then clears them down from state
+    removeCompletedItems() {
+        fetch(
+            "https://localhost:5001/ToDoList/RemoveCompletedItemsForList",
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        ).then(resp => resp.json())
+            .then((removedRows) =>
+                this.setState(prevState => {
+                    const updatedTodos = prevState.todos.filter(todo => todo.isCompleted !== true)
+                    return {
+                        ...prevState,
+                        todos: updatedTodos
+                    }
+                },
+                    alert('Deleted ' + removedRows + ' Rows.')
+                )
+            )
     }
 
     // Loads in the list form API and updates the loading state property
@@ -125,7 +175,8 @@ class ToDoList extends Component {
             <ToDoItem
                 key={item.id}
                 item={item}
-                handleChange={this.handleChange} />
+                handleChange={this.handleChange}
+                deleteItem={this.deleteItem} />
         ))
 
         const content = this.state.loading
@@ -137,6 +188,7 @@ class ToDoList extends Component {
                 <div className='toDoListHeader'>
                     <h1 className='listName'>{this.props.list.listName}</h1>
                     <div className='close' onClick={this.props.closeList} />
+                    <button className='removeCompletedItems' onClick={this.removeCompletedItems} > Remove Completed Items</button>
                 </div>
                 <div className='toDoListContent'>
                     {content}

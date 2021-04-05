@@ -41,6 +41,7 @@ class ToDoItem extends React.Component {
                     checked={this.props.item.isCompleted}
                     onChange={this.handleInput} />
                 {textDisplay}
+                <span className="deleteItem" onClick={(event) => this.props.deleteItem(this.props.item.id)}>Delete</span>
             </form>
         )
     }

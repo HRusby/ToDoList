@@ -38,13 +38,13 @@ namespace ToDoListBackEnd.Api.Controllers
 
         [HttpPost]
         [Route("InsertItemForList")]
-        public void InsertItemForList([FromBody]JsonElement data)
+        public int InsertItemForList([FromBody]JsonElement data)
         {
             int listId = Convert.ToInt32(data.GetProperty("listId").ToString());
             int userId = Convert.ToInt32(data.GetProperty("userId").ToString());
             string text = data.GetProperty("text").ToString();
             bool isCompleted = Convert.ToBoolean(data.GetProperty("isCompleted").ToString());
-            Dao.AddItemToList (listId, userId, text, isCompleted);
+            return Dao.AddItemToList (listId, userId, text, isCompleted);
         }
 
         [HttpPost]
@@ -59,6 +59,22 @@ namespace ToDoListBackEnd.Api.Controllers
             foreach(ListItem item in items){
                 Dao.UpdateSpecificListItem(item);
             }
+        }
+
+        [HttpPost]
+        [Route("RemoveCompletedItemsForList")]
+        public int RemoveCompletedItemsForList(int listId){
+            // Returns number of rows deleted
+            return Dao.DeleteCompletedItemsForList(listId);
+        }
+
+        [HttpPost]
+        [Route("DeleteListItem")]
+        public int DeleteListItem([FromBody]JsonElement data){
+            int listId = Convert.ToInt32(data.GetProperty("listId").ToString());
+            int itemId = Convert.ToInt32(data.GetProperty("itemId").ToString());
+            // Returns number of rows deleted (should always be 1)
+            return Dao.DeleteListItem(listId, itemId);
         }
     }
 }

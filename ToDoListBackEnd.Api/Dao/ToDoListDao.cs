@@ -50,14 +50,18 @@ namespace ToDoListBackEnd.Api.Dao
             return results;
         }
 
-        public void AddItemToList(int listId, int userId, string itemText, bool isCompleted){
+        public int AddItemToList(int listId, int userId, string itemText, bool isCompleted){
             using(MySqlCommand cmd = new MySqlCommand("AddListItem", Connection)){
                 cmd.CommandType = CommandType.StoredProcedure;
+                MySqlParameter generatedId = new MySqlParameter("generatedId", MySqlDbType.Int32);
+                generatedId.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(new MySqlParameter("lId", listId));
                 cmd.Parameters.Add(new MySqlParameter("itemText", itemText));
                 cmd.Parameters.Add(new MySqlParameter("isCompleted", isCompleted));
                 cmd.Parameters.Add(new MySqlParameter("uId", userId));
+                cmd.Parameters.Add(generatedId);
                 cmd.ExecuteNonQuery();
+                return Convert.ToInt32(generatedId.Value);
             }
         }
 
@@ -69,6 +73,23 @@ namespace ToDoListBackEnd.Api.Dao
                 cmd.Parameters.AddWithValue("isCompleted", item.IsCompleted);
                 int rows = cmd.ExecuteNonQuery();
             }            
+        }
+
+        public int DeleteCompletedItemsForList(int listId){
+            using(MySqlCommand cmd = new MySqlCommand("DeleteCompletedItemsForList", Connection)){
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("listId", listId);
+                return cmd.ExecuteNonQuery();
+            }
+        }
+
+        public int DeleteListItem(int listId, int itemId){
+            using(MySqlCommand cmd = new MySqlCommand("DeleteListItem", Connection)){
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("$listId", listId);
+                cmd.Parameters.AddWithValue("$itemId", itemId);
+                return cmd.ExecuteNonQuery();
+            }
         }
     }
 }

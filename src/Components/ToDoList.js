@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import ToDoItem from './ToDoItem'
-import NewToDoItem from './NewToDoItem'
+import NewItem from './NewItem'
 import '../css/ToDoList.css'
 
 class ToDoList extends Component {
@@ -192,7 +192,7 @@ class ToDoList extends Component {
                 </div>
                 <div className='toDoListContent'>
                     {content}
-                    <NewToDoItem addItem={this.addNewItem} />
+                    <NewItem addItem={this.addNewItem} placeHolderText="New To Do Item..." />
                 </div>
             </div>)
     }

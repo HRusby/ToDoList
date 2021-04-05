@@ -1,6 +1,6 @@
 import React from "react"
 
-class NewToDoItem extends React.Component {
+class NewItem extends React.Component {
     constructor(props) {
         super(props)
 
@@ -29,7 +29,7 @@ class NewToDoItem extends React.Component {
                 <input type="checkbox" disabled />
                 <input
                     type="text"
-                    placeholder="New Task..."
+                    placeholder={this.props.placeHolderText}
                     value={this.state.itemText}
                     onChange={this.handleChange} />
             </form>
@@ -37,4 +37,4 @@ class NewToDoItem extends React.Component {
     }
 }
 
-export default NewToDoItem;
+export default NewItem;

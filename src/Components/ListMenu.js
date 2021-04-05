@@ -1,7 +1,7 @@
 import React from "react";
 import ListSelector from "./ListSelector"
 import '../css/ListMenu.css'
-import NewToDoItem from "./NewToDoItem";
+import NewItem from "./NewItem";
 
 function ListMenu(props) {
     var Lists = []
@@ -18,7 +18,7 @@ function ListMenu(props) {
         <div className='listMenu'>
             <h1>Select a List</h1>
             {Lists}
-            <NewToDoItem addItem={props.addNewList} />
+            <NewItem addItem={props.addNewList} placeHolderText="New List..." />
         </div>
     )
 }

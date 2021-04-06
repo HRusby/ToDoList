@@ -181,23 +181,37 @@ class ToDoList extends Component {
                     deleteItem={this.deleteItem} />
             ))
 
+        const incompleteItems = ToDos.filter(x => !x.props.item.isCompleted)
+        const completeItems = ToDos.filter(x => x.props.item.isCompleted)
+
+        var completeItemsContent = null;
+
+
+        console.log(completeItemsContent)
+
         const content = this.state.loading
-            ? <p>loading...</p>
-            : ToDos
+            ? <p className='toDoListContent'>loading...</p>
+            : <div className='toDoListContent'>
+                <div className='toDoItems'>{incompleteItems}<NewItem addItem={this.addNewItem} placeHolderText="New To Do Item..." /></div>
+                {completeItems.length > 0 ?
+                    <div className='toDoItems'>
+                        <div className='completedItemsHeader'>
+                            <i>CompletedItems</i>
+                            <i className="material-icons deleteItem" onClick={this.removeCompletedItems}>delete</i>
+                        </div>
+                        {completeItems}
+                    </div>
+                    : null
+                }
+            </div>
 
         return (
             <div className="ToDoList">
                 <div className='toDoListHeader'>
                     <h1 className='listName'>{this.props.list.listName}</h1>
                     <div className='close' onClick={this.props.closeList} />
-                    <i className='removeCompletedItems' onClick={this.removeCompletedItems} value="">
-                        Remove Completed Items
-                    </i>
                 </div>
-                <div className='toDoListContent'>
-                    {content}
-                </div>
-                <NewItem addItem={this.addNewItem} placeHolderText="New To Do Item..." />
+                {content}
             </div>)
     }
 }

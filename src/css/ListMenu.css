@@ -1,32 +1,31 @@
 .listMenu {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto;
+  display: block;
+  justify-content: center;
+  margin:auto;
   margin-top: 10px;
   width: 85%;
 }
 
 .listMenu h1{
-  position: relative;
   display: inline-flex;
   justify-content: center;
   margin: auto;
+  margin-bottom: 5px;
   width: 100%;
   border-bottom: 2px solid #92929278;
   border-top: 2px solid #92929278;
 }
 
+.listMenuContent{
+  width:70%;
+  margin: auto;
+}
+
 .ListSelector {
   position: relative;
-  display: inline-flex;
-  margin: auto;
-  justify-content: center;
-  width: 70%;
+  text-align: center;
   border-bottom: 1px solid #ececece1;
   font-family: Roboto, sans-serif;
-  font-weight: 100;
   font-size: 15px;
 }
 

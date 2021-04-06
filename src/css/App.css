@@ -21,7 +21,6 @@ main {
 input[type="text"]{
   border: none;
   border-bottom: 1px solid rgba(128, 128, 128, 0.5);
-  width: 100%;
 }
 
 input[type="text"]::placeholder{
@@ -29,6 +28,9 @@ input[type="text"]::placeholder{
 }
 
 .NewItem{
-  width:70%;
-  margin: auto;
+  margin-bottom: 5px;
+}
+
+.NewItem input[type="text"]{
+  width: 100%;
 }

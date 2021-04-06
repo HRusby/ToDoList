@@ -17,8 +17,10 @@ function ListMenu(props) {
     return (
         <div className='listMenu'>
             <h1>Select a List</h1>
-            {Lists}
-            <NewItem addItem={props.addNewList} placeHolderText="New List..." />
+            <div className='listMenuContent'>
+                {Lists}
+                <NewItem addItem={props.addNewList} placeHolderText="New List..." />
+            </div>
         </div>
     )
 }

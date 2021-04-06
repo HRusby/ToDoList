@@ -29,7 +29,7 @@ class ToDoItem extends React.Component {
                 onBlur={(event) => { this.handleInput(event); this.toggleTextEditable() }} />
             : <span
                 className={this.props.item.isCompleted ? "completedToDoText" : null}
-                onDoubleClick={this.toggleTextEditable} >
+                onClick={this.toggleTextEditable} >
                 {this.props.item.text}
             </span>
 

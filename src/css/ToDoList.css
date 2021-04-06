@@ -4,15 +4,10 @@
   margin: auto;
   margin-top: 10px;
   width: 70%;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
 }
 
 .toDoListHeader {
   position: relative;
-  display: inline-flex;
-  justify-content: center;
   margin: auto;
   width: 100%;
   border-bottom: 2px solid #92929278;
@@ -25,8 +20,6 @@
 }
 
 .toDoListContent {
-  display: flex;
-  flex-direction: column;
   align-items: center;
   width: 70%;
   margin: auto;
@@ -34,17 +27,29 @@
   border-bottom: 1px solid #cecece;
 }
 
+.toDoItems{
+  position: relative;
+  margin: auto;
+  width: 70%;
+}
+
 .ToDoItem {
   position: relative;
-  display: inline-flex;
   align-items: center;
-  padding: 0px 20px 0px;
+  margin: auto;
   margin-bottom: 5px;
-  width: 90%;
   font-family: Roboto, sans-serif;
   font-weight: 100;
   font-size: 15px;
   color: #333333;
+}
+
+.completedItemsHeader{
+  position: relative;
+  text-align: center;
+  margin: auto;
+  margin-bottom: 5px;
+  border-bottom: 2px solid #92929278;
 }
 
 .completedToDoText {
@@ -96,6 +101,7 @@ input[type="checkbox"]:focus {
   width: 10%;
   right: 10px;
   height: 100%;
+  text-align: center;
   color: rgba(255, 0, 0, 0.5);
 }
 

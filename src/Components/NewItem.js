@@ -24,9 +24,8 @@ class NewItem extends React.Component {
     render() {
         return (
             <form
-                className="ToDoItem"
+                className="NewItem"
                 onSubmit={e => { e.preventDefault(); this.handleSubmit(e) }}>
-                <input type="checkbox" disabled />
                 <input
                     type="text"
                     placeholder={this.props.placeHolderText}

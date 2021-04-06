@@ -1,13 +1,13 @@
 import React from "react"
 
 function ListSelector(props) {
-    return (<span>
-        <span className='ListSelector' onClick={() => props.selectList(props.list)}>
+    return (<span className='ListSelector'>
+        <span className="listName" onClick={() => props.selectList(props.list)}>
             {props.list.listName}
         </span>
-        <button onClick={() => props.deleteList(props.list.listId)}>Delete</button>
+        <i onClick={() => props.deleteList(props.list.listId)}
+            className="material-icons deleteList" >delete</i>
     </span>)
 }
 
 export default ListSelector
-

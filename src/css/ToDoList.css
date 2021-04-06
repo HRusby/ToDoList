@@ -1,8 +1,12 @@
 .ToDoList {
+  display: block;
+  position: relative;
   margin: auto;
   margin-top: 10px;
   width: 70%;
-  display: block;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
 }
 
 .toDoListHeader {
@@ -24,13 +28,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 90%;
+  width: 70%;
   margin: auto;
   margin-top: 10px;
   border-bottom: 1px solid #cecece;
 }
 
 .ToDoItem {
+  position: relative;
   display: inline-flex;
   align-items: center;
   padding: 0px 20px 0px;
@@ -83,4 +88,20 @@ input[type="checkbox"]:focus {
 }
 .close:after {
   transform: rotate(-45deg);
+}
+
+.deleteItem{
+  position:absolute;
+  margin:auto;
+  width: 10%;
+  right: 10px;
+  height: 100%;
+  color: rgba(255, 0, 0, 0.5);
+}
+
+.deleteItem:hover{
+  color: rgba(255, 0, 0, 1)
+}
+.deleteItem:active{
+  color: rgba(161, 0, 0, 0.733)
 }

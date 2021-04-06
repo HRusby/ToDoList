@@ -9,6 +9,7 @@
 }
 
 .ListSelector {
+  position: relative;
   display: inline-flex;
   margin: auto;
   justify-content: center;
@@ -18,10 +19,34 @@
   font-weight: 100;
   font-size: 15px;
 }
+
 .ListSelector:hover {
   background-color: #f3f3f346;
 }
 
 .ListSelector:active {
-  background-color: #ebebeb4f;
+  background-color: #ebebeb83;
+}
+
+.listName{
+  width: 90%;
+  text-align: center;
+  margin: auto;
+}
+
+.deleteList{
+  position:absolute;
+  margin: auto;
+  width: 10%;
+  right: 10px;
+  height: 100%;
+  font-size: 20px;
+  color: rgba(255, 0, 0, 0.5);
+}
+
+.deleteList:hover{
+  color: rgba(255, 0, 0, 1)
+}
+.deleteList:active{
+  color: rgba(161, 0, 0, 0.733)
 }

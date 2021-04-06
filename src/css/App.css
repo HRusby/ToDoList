@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 body {
   background-color: whitesmoke;
 }
@@ -15,4 +16,19 @@ main {
     /* The second layer shadow */ 0 10px 1px -4px rgba(0, 0, 0, 0.15),
     /* The third layer */ 0 20px 0 -10px #eee,
     /* The third layer shadow */ 0 20px 1px -9px rgba(0, 0, 0, 0.15);
+}
+
+input[type="text"]{
+  border: none;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+  width: 100%;
+}
+
+input[type="text"]::placeholder{
+  text-align: center;
+}
+
+.NewItem{
+  width:70%;
+  margin: auto;
 }

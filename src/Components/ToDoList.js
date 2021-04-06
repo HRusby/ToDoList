@@ -188,12 +188,12 @@ class ToDoList extends Component {
                 <div className='toDoListHeader'>
                     <h1 className='listName'>{this.props.list.listName}</h1>
                     <div className='close' onClick={this.props.closeList} />
-                    <button className='removeCompletedItems' onClick={this.removeCompletedItems} > Remove Completed Items</button>
+                    <i className='removeCompletedItems' onClick={this.removeCompletedItems} value=""> Remove Completed Items</i>
                 </div>
                 <div className='toDoListContent'>
                     {content}
-                    <NewItem addItem={this.addNewItem} placeHolderText="New To Do Item..." />
                 </div>
+                <NewItem addItem={this.addNewItem} placeHolderText="New To Do Item..." />
             </div>)
     }
 }

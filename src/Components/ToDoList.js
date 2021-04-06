@@ -171,13 +171,15 @@ class ToDoList extends Component {
     }
 
     render() {
-        const ToDos = this.state.todos.map((item) => (
-            <ToDoItem
-                key={item.id}
-                item={item}
-                handleChange={this.handleChange}
-                deleteItem={this.deleteItem} />
-        ))
+        const ToDos = this.state.todos
+            .sort((x, y) => x.isCompleted - y.isCompleted)
+            .map((item) => (
+                <ToDoItem
+                    key={item.id}
+                    item={item}
+                    handleChange={this.handleChange}
+                    deleteItem={this.deleteItem} />
+            ))
 
         const content = this.state.loading
             ? <p>loading...</p>
@@ -188,7 +190,9 @@ class ToDoList extends Component {
                 <div className='toDoListHeader'>
                     <h1 className='listName'>{this.props.list.listName}</h1>
                     <div className='close' onClick={this.props.closeList} />
-                    <i className='removeCompletedItems' onClick={this.removeCompletedItems} value=""> Remove Completed Items</i>
+                    <i className='removeCompletedItems' onClick={this.removeCompletedItems} value="">
+                        Remove Completed Items
+                    </i>
                 </div>
                 <div className='toDoListContent'>
                     {content}

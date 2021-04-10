@@ -184,11 +184,6 @@ class ToDoList extends Component {
         const incompleteItems = ToDos.filter(x => !x.props.item.isCompleted)
         const completeItems = ToDos.filter(x => x.props.item.isCompleted)
 
-        var completeItemsContent = null;
-
-
-        console.log(completeItemsContent)
-
         const content = this.state.loading
             ? <p className='toDoListContent'>loading...</p>
             : <div className='toDoListContent'>

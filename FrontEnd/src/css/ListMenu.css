@@ -1,0 +1,61 @@
+.listMenu {
+  display: block;
+  justify-content: center;
+  margin:auto;
+  margin-top: 10px;
+  width: 85%;
+}
+
+.listMenu h1{
+  display: inline-flex;
+  justify-content: center;
+  margin: auto;
+  margin-bottom: 5px;
+  width: 100%;
+  border-bottom: 2px solid #92929278;
+  border-top: 2px solid #92929278;
+}
+
+.listMenuContent{
+  width:70%;
+  margin: auto;
+}
+
+.ListSelector {
+  position: relative;
+  text-align: center;
+  border-bottom: 1px solid #ececece1;
+  font-family: Roboto, sans-serif;
+  font-size: 15px;
+}
+
+.ListSelector:hover {
+  background-color: #f3f3f346;
+}
+
+.ListSelector:active {
+  background-color: #ebebeb83;
+}
+
+.listName{
+  width: 90%;
+  text-align: center;
+  margin: auto;
+}
+
+.deleteList{
+  position:absolute;
+  margin: auto;
+  width: 10%;
+  right: 10px;
+  height: 100%;
+  font-size: 20px;
+  color: rgba(255, 0, 0, 0.5);
+}
+
+.deleteList:hover{
+  color: rgba(255, 0, 0, 1)
+}
+.deleteList:active{
+  color: rgba(161, 0, 0, 0.733)
+}

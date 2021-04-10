@@ -2,16 +2,16 @@ using System.Collections.Generic;
 using ToDoListBackEnd.Api.Domain;
 using ToDoListBackEnd.Api.Dao.Abstracts;
 using MySql.Data.MySqlClient;
-using MySql.Data;
 using System;
-using System.Linq;
-using System.Text;
 using System.Data;
 
 namespace ToDoListBackEnd.Api.Dao
 {
     public class ToDoListDao : ADao
     {
+        public ToDoListDao(string connectionString)
+            : base(connectionString) { }
+
         // Return all lists for a given user
         public List<ToDoList> GetAllLists(int userId)
         {

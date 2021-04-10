@@ -1,9 +1,9 @@
-using System.ComponentModel;
 using System;
 using System.Text.Json;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
 using ToDoListBackEnd.Api.Dao;
 using ToDoListBackEnd.Api.Domain;
 
@@ -16,10 +16,11 @@ namespace ToDoListBackEnd.Api.Controllers
         private readonly ILogger<ToDoListController> _logger;
         private readonly ToDoListDao Dao;
 
-        public ToDoListController(ILogger<ToDoListController> logger)
+        public ToDoListController(ILogger<ToDoListController> logger, IConfiguration configuration)
         {
             _logger = logger;
-            Dao = new ToDoListDao();
+            string connString = configuration.GetValue<string>("ConnectionStrings:ToDoList");
+            Dao = new ToDoListDao(connString);
         }
 
         [HttpPost]

@@ -6,7 +6,6 @@ using MySql.Data;
 using System;
 using System.Linq;
 using System.Text;
-
 using System.Data;
 
 namespace ToDoListBackEnd.Api.Dao
@@ -18,15 +17,16 @@ namespace ToDoListBackEnd.Api.Dao
         {
             List<ToDoList> results = new List<ToDoList>();
             string sql = $"SELECT ListId, RelatedGroup, ListName FROM Lists WHERE UserId = {userId}";
-            MySqlCommand cmd = new MySqlCommand(sql, Connection);
-            MySqlDataReader rdr = cmd.ExecuteReader();
+            using(MySqlCommand cmd = new MySqlCommand(sql, Connection)){
+                MySqlDataReader rdr = cmd.ExecuteReader();
 
-            while (rdr.Read())
-            {
-                ToDoList list = new ToDoList(
-                    rdr.GetInt32("ListId"),
-                    rdr.GetString("ListName"));
-                results.Add(list);
+                while (rdr.Read())
+                {
+                    ToDoList list = new ToDoList(
+                        rdr.GetInt32("ListId"),
+                        rdr.GetString("ListName"));
+                    results.Add(list);
+                }
             }
 
             return results;
@@ -37,16 +37,17 @@ namespace ToDoListBackEnd.Api.Dao
         {
             List<ListItem> results = new List<ListItem>();
             string sql = $"SELECT ItemId, Text, Completed FROM ListItems WHERE ListId = {listId};";
-            MySqlCommand cmd = new MySqlCommand(sql, Connection);
-            MySqlDataReader rdr = cmd.ExecuteReader();
+            using(MySqlCommand cmd = new MySqlCommand(sql, Connection)){
+                MySqlDataReader rdr = cmd.ExecuteReader();
 
-            while (rdr.Read())
-            {
-                ListItem item = new ListItem(
-                    rdr.GetInt32("ItemId"),
-                    rdr.GetString("Text"),
-                    rdr.GetBoolean("Completed"));
-                results.Add(item);
+                while (rdr.Read())
+                {
+                    ListItem item = new ListItem(
+                        rdr.GetInt32("ItemId"),
+                        rdr.GetString("Text"),
+                        rdr.GetBoolean("Completed"));
+                    results.Add(item);
+                }
             }
 
             return results;

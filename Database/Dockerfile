@@ -1,12 +1,14 @@
 ARG VERSION=10.4
 FROM mariadb/server:${VERSION}
+ENV MYSQL_ROOT_PASSWORD admin
 EXPOSE 3306
 
 
-# Run command 
-# docker run -d --name todol 
+### Docker Build ###
+# docker build -t todolist-database-image .
+### Docker Run ###
+# docker run -d \
+# --name=todolist-database \
 # -p 6001:3306 \
-# -v todo-db:/etc/todos \
-# -e MYSQL_ROOT_PASSWORD=root \
-# -e MYSQL_DATABASE=ToDoList \
+# -v todo-db:/var/lib/mysql \
 # todolist-database-image

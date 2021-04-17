@@ -13,8 +13,10 @@ COPY . ./
 
 CMD ["npm", "start"]
 
-#docker build --network=host -t todolist-frontend-image
+### Docker Build ###
+# docker build --network=host -t todolist-frontend-image
 
+### Docker Run ###
 # docker run -it \
 # --rm \
 # -v ${PWD}:/todolist-frontend \

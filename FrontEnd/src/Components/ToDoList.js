@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import ToDoItem from './ToDoItem'
 import NewItem from './NewItem'
+import ConfigData from '../Config/config.json'
 import '../css/ToDoList.css'
 
 class ToDoList extends Component {
@@ -51,7 +52,7 @@ class ToDoList extends Component {
     // Retrieves the specified item from state and submits it to the Api UpdateSpecificListItem endpoint
     submitSingleItem(itemId) {
         const item = this.state.todos.filter((todo) => todo.id === itemId)[0];
-        fetch("https://localhost:5001/ToDoList/UpdateSpecificListItem",
+        fetch(ConfigData.backendUrl + "ToDoList/UpdateSpecificListItem",
             {
                 method: 'POST',
                 headers: {
@@ -65,7 +66,7 @@ class ToDoList extends Component {
     // Adds the new item to the database and the Component
     addNewItem(itemText) {
         //Add to Database via API
-        fetch("https://localhost:5001/ToDoList/InsertItemForList",
+        fetch(ConfigData.backendUrl + "ToDoList/InsertItemForList",
             {
                 method: 'POST',
                 headers: {
@@ -93,8 +94,7 @@ class ToDoList extends Component {
 
     deleteItem(itemId) {
         const listId = this.props.list.listId
-        fetch(
-            "https://localhost:5001/ToDoList/DeleteListItem",
+        fetch(ConfigData.backendUrl + "ToDoList/DeleteListItem",
             {
                 method: 'POST',
                 headers: {
@@ -116,8 +116,7 @@ class ToDoList extends Component {
 
     // Calls the API and deletes all completed items then clears them down from state
     removeCompletedItems() {
-        fetch(
-            "https://localhost:5001/ToDoList/RemoveCompletedItemsForList",
+        fetch(ConfigData.backendUrl + "ToDoList/RemoveCompletedItemsForList",
             {
                 method: 'POST',
                 headers: {
@@ -144,8 +143,7 @@ class ToDoList extends Component {
             return { ...prevState, loading: true }
         })
 
-        fetch(
-            'https://localhost:5001/ToDoList/GetAllListItemsForListId',
+        fetch(ConfigData.backendUrl + "ToDoList/GetAllListItemsForListId",
             {
                 method: 'POST',
                 headers: {
@@ -159,7 +157,7 @@ class ToDoList extends Component {
 
     // Submits all items in state before removing component
     componentWillUnmount() {
-        fetch("https://localhost:5001/ToDoList/UpdateListItemSet",
+        fetch(ConfigData.backendUrl + "ToDoList/UpdateListItemSet",
             {
                 method: 'POST',
                 headers: {

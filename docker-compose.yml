@@ -1,0 +1,45 @@
+version: '3.3'
+services:
+  db: # Service Hosting MariaDb
+    build: ./Database
+    container_name: todolist-database
+    ports:
+      - "6001:3306"
+    volumes:
+      - todo-db:/var/lib/mysql
+    restart: always 
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: ToDoList
+      MYSQL_USER: root
+    
+  backend: # Backend C# Service
+    build: ./BackEnd
+    container_name: todolist-backend
+    #ports:
+    #  - "5002:80"
+    restart: always
+    depends_on: 
+      - db
+    #links: 
+     # - db
+    network_mode: host
+  frontend:
+    build: 
+      context: ./FrontEnd
+      network: host
+    container_name: todolist-frontend
+    #ports:
+    #  - "7001:3000"
+    volumes:
+      - ${PWD}:/todolist-frontend
+      - /todolist/node_modules
+    restart: always
+    environment: 
+      CHOKIDAR_USEPOLLING: "true"
+    depends_on:
+      - db
+      - backend
+    network_mode: host
+volumes:
+  todo-db:

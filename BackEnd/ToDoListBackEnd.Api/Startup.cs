@@ -51,7 +51,7 @@ namespace ToDoListBackEnd.Api
             app
                 .UseCors(builder =>
                     builder
-                        .WithOrigins("http://localhost:3000")
+                        .WithOrigins("http://localhost:3000", "http://localhost:7001")
                         .AllowAnyMethod()
                         .AllowAnyHeader());
             app.UseAuthorization();

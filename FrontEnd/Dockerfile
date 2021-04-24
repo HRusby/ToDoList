@@ -14,11 +14,10 @@ COPY . ./
 CMD ["npm", "start"]
 
 ### Docker Build ###
-# docker build --network=host -t todolist-frontend-image
+# docker build --network=host -t todolist-frontend-image .
 
 ### Docker Run ###
 # docker run -it \
-# --rm \
 # -v ${PWD}:/todolist-frontend \
 # -v /todolist/node_modules \
 # -p 7001:3000 \

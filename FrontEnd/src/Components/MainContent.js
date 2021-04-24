@@ -1,6 +1,7 @@
 import React from 'react'
 import ToDoList from './ToDoList'
 import ListMenu from './ListMenu'
+import ConfigData from '../Config/config.json'
 
 class MainContent extends React.Component {
   constructor() {
@@ -28,7 +29,7 @@ class MainContent extends React.Component {
   }
 
   addNewList(listName) {
-    fetch("https://localhost:5001/ToDoList/AddNewList",
+    fetch(ConfigData.backendUrl + "ToDoList/AddNewList",
       {
         method: 'POST',
         headers: {
@@ -48,7 +49,7 @@ class MainContent extends React.Component {
   }
 
   deleteList(listId) {
-    fetch("https://localhost:5001/ToDoList/DeleteList",
+    fetch(ConfigData.backendUrl + "ToDoList/DeleteList",
       {
         method: 'POST',
         headers: {
@@ -73,8 +74,7 @@ class MainContent extends React.Component {
       return { ...prevState, loading: true }
     })
 
-    fetch(
-      'https://localhost:5001/ToDoList/GetAllListsForUser',
+    fetch(ConfigData.backendUrl + 'ToDoList/GetAllListsForUser',
       {
         method: 'POST',
         headers: {

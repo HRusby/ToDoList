@@ -7,7 +7,11 @@ WORKDIR /ToDoListBackEnd
 ENTRYPOINT ["dotnet", "ToDoListBackEnd.Api.dll"]
 
 ### Docker Build ###
-#docker build -t todolist-backend-image .
+# docker build -t todolist-backend-image .
 
 ### Docker Run ###
-#docker -d -p 5001:80 --name=todolist-backend todolist-backend-image
+# docker run -d \
+# -p 5001:80 \
+# --network todolist \
+# --name=todolist-backend \
+# todolist-backend-image
